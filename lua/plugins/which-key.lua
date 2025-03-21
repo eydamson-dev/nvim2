@@ -32,12 +32,6 @@ return {
           g = false,        -- Bindings prefixed with g
         },
       },
-      -- legacy key_labels = {
-      --   -- Optional: Override labels for special keys for improved readability
-      --   ["<space>"] = "SPC",
-      --   ["<cr>"] = "RET",
-      --   ["<tab>"] = "TAB",
-      -- },
       icons = {
         breadcrumb = "»", -- Symbol for active key combo in the command line
         separator = "➜", -- Symbol between a key and its label
