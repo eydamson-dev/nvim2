@@ -91,7 +91,6 @@ return {
         { "<leader>la", "<cmd>Lspsaga code_action<cr>",                     desc = "Code Actions" },
         { "<leader>ld", "<cmd>Lspsaga show_cursor_diagnostics<cr>",         desc = "Cursor Diagnostic" },
         { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<cr>",     desc = "Workspace Diagnostics" },
-        { "<leader>lf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",  desc = "Format" },
         { "<leader>lh", "<cmd>Lspsaga hover_doc<cr>",                       desc = "Hover" },
         { "<leader>li", "<cmd>LspInfo<cr>",                                 desc = "Info" },
         { "<leader>lI", "<cmd>LspInstallInfo<cr>",                          desc = "Installer Info" },
