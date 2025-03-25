@@ -18,7 +18,7 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup({
         automatic_installation = false,
-        ensure_installed = { 'bashls', 'cssmodules_ls', 'eslint', 'html', 'jsonls', 'lua_ls', }
+        ensure_installed = { 'bashls', 'cssmodules_ls', 'eslint', 'html', 'jsonls', 'lua_ls', 'vtsls' }
       })
 
       local cmp_capabilities = require('cmp_nvim_lsp')
