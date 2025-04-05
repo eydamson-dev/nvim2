@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "smoka7/multicursors.nvim",
   event = "VeryLazy",
   dependencies = {

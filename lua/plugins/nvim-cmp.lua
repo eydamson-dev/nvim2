@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   "hrsh7th/nvim-cmp",      -- The completion plugin
   dependencies = {
     "hrsh7th/cmp-buffer",  -- buffer completions

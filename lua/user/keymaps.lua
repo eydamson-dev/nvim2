@@ -53,8 +53,8 @@ keymap("n", "<S-k>", ":bnext<CR>", opts)
 keymap("n", "<S-j>", ":bprevious<CR>", opts)
 
 -- Close buffer
--- keymap("n", "<C-x>", ":bd<CR>", opts)
-keymap("n", "<C-x>", ":Bdelete<CR>", opts)
+keymap("n", "<C-x>", ":bd<CR>", opts)
+-- keymap("n", "<C-x>", ":Bdelete<CR>", opts)
 keymap("n", "<C-q>", ":q<CR>", opts)
 
 -- Insert --

@@ -16,7 +16,7 @@ return {
       on_attach = "default",
       hijack_cursor = false,
       auto_reload_on_write = true,
-      disable_netrw = false,
+      disable_netrw = true,
       hijack_netrw = true,
       hijack_unnamed_buffer_when_opening = false,
       root_dirs = { '.git' },
@@ -61,7 +61,7 @@ return {
         indent_width = 2,
         special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
         symlink_destination = true,
-        highlight_git = false,
+        highlight_git = "none",
         highlight_opened_files = "none",
         highlight_modified = "none",
         indent_markers = {
@@ -88,6 +88,7 @@ return {
           },
           git_placement = "before",
           modified_placement = "after",
+          hidden_placement = "after",
           padding = " ",
           symlink_arrow = " ➛ ",
           show = {
