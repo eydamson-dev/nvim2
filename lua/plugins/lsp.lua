@@ -84,7 +84,7 @@ return {
 		wk.add({
 			{ "<leader>l", group = "LSP" },
 			{ "<leader>la", "<cmd>Lspsaga code_action<cr>", desc = "Code Actions" },
-			{ "<leader>ld", "<cmd>Lspsaga show_cursor_diagnostics<cr>", desc = "Cursor Diagnostic" },
+			{ "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Line Diagnostic" },
 			{ "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
 			{ "<leader>lh", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover" },
 			{ "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
