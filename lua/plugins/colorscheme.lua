@@ -1,19 +1,11 @@
 return {
-  'folke/tokyonight.nvim',
-  config = function()
-    require("tokyonight").setup({
-      transparent = false,
-      -- styles = {
-      --   sidebars = "transparent"
-      -- }
-    })
-
-    local colorscheme = "tokyonight"
-
-    local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-    if not status_ok then
-      vim.notify("colorscheme " .. colorscheme .. " not found!")
-      return
-    end
-  end
+	"catppuccin/nvim",
+	name = "catppuccin",
+	priority = 1000,
+  init = function ()
+    vim.cmd.colorscheme "catppuccin-macchiato"
+  end,
+  opts = {
+    transparent_background = true
+  }
 }
