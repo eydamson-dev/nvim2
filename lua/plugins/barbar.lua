@@ -1,40 +1,30 @@
 return {
 	"romgrk/barbar.nvim",
 	lazy = false,
-  enabled = true,
 	dependencies = {
 		"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
 		"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
 	},
 	version = "^1.0.0", -- optional: only update when a new 1.x version is released
-	config = function()
-		require("barbar").setup({
-			tabpages = false,
-			focus_on_close = "left",
-			highlight_visible = true,
-			highlight_inactive = true,
-			icons = {
-				preset = "default",
-				separator_at_end = false,
-				separator = {
-					left = "",
-					right = " 󰇙",
-				},
-				filetype = {
-					-- Sets the icon's highlight group.
-					-- If false, will use nvim-web-devicons colors
-					custom_colors = false,
-
-					-- Requires `nvim-web-devicons` if `true`
-					enabled = true,
-				},
+	opts = {
+		tabpages = true,
+		focus_on_close = "left",
+		highlight_visible = true,
+		highlight_inactive = true,
+		icons = {
+			separator_at_end = false,
+			filetype = {
+				custom_colors = false,
+				enabled = true,
 			},
+		},
 
-			sidebar_filetypes = {
-				NvimTree = true,
-			},
-		})
-
+		sidebar_filetypes = {
+			NvimTree = true,
+		},
+	},
+	init = function()
+		vim.g.barbar_auto_setup = false
 		local keymap = vim.api.nvim_set_keymap
 		local opts = { noremap = true, silent = true }
 
