@@ -29,7 +29,7 @@ return {
 			preset = "default",
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
-      ["<enter>"] = {"accept", "fallback"}
+			["<enter>"] = { "accept", "fallback" },
 		},
 
 		appearance = {
@@ -38,26 +38,47 @@ return {
 			nerd_font_variant = "mono",
 		},
 
-    signature = {
-      enabled = true
-    },
+		signature = {
+			enabled = true,
+		},
 
 		-- (Default) Only show the documentation popup when manually triggered
 		completion = {
-      documentation = { auto_show = true },
-      menu = {
-        border = 'rounded'
-      },
+			documentation = {
+				auto_show = true,
+				border = "rounded",
+			},
+			menu = {
+				border = "rounded",
+			},
 
-      ghost_text = {
-        enabled = false
-      }
-    },
+			ghost_text = {
+				enabled = false,
+			},
+		},
 
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
+			providers = {
+				path = {
+					opts = {
+						get_cwd = function(_)
+							return vim.fn.getcwd()
+						end,
+					},
+				},
+				buffer = {
+					opts = {
+						get_bufnrs = function()
+							return vim.tbl_filter(function(bufnr)
+								return vim.bo[bufnr].buftype == ""
+							end, vim.api.nvim_list_bufs())
+						end,
+					},
+				},
+			},
 		},
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
