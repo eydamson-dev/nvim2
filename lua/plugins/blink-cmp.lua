@@ -46,7 +46,6 @@ return {
 		completion = {
 			documentation = {
 				auto_show = true,
-				border = "rounded",
 			},
 			menu = {
 				border = "rounded",
