@@ -1,7 +1,11 @@
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
-	dependencies = { "rafamadriz/friendly-snippets" },
+	dependencies = {
+		"rafamadriz/friendly-snippets",
+		"Kaiser-Yang/blink-cmp-avante",
+		"giuxtaposition/blink-cmp-copilot",
+	},
 
 	-- use a release tag to download pre-built binaries
 	version = "1.*",
@@ -13,44 +17,49 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
-		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-		-- 'super-tab' for mappings similar to vscode (tab to accept)
-		-- 'enter' for enter to accept
-		-- 'none' for no mappings
-		--
-		-- All presets have the following mappings:
-		-- C-space: Open menu or open docs if already open
-		-- C-n/C-p or Up/Down: Select next/previous item
-		-- C-e: Hide menu
-		-- C-k: Toggle signature help (if signature.enabled = true)
-		--
-		-- See :h blink-cmp-config-keymap for defining your own keymap
 		keymap = {
 			preset = "default",
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
 			["<enter>"] = { "accept", "fallback" },
 		},
-
 		appearance = {
-			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- Adjusts spacing to ensure icons are aligned
 			nerd_font_variant = "mono",
 		},
 
 		signature = {
 			enabled = true,
+			window = {
+				border = "rounded",
+			},
 		},
 
-		-- (Default) Only show the documentation popup when manually triggered
 		completion = {
+			list = {
+				selection = {
+					preselect = true,
+					auto_insert = false,
+				},
+			},
 			documentation = {
 				auto_show = true,
+				window = {
+					border = "rounded",
+				},
 			},
 			menu = {
 				border = "rounded",
+				draw = {
+					treesitter = {
+						"lsp",
+					},
+					columns = {
+						{ "kind_icon" },
+						{ "label", "label_description", gap = 1 },
+						{ "source_name" },
+					},
+				},
 			},
-
 			ghost_text = {
 				enabled = false,
 			},
@@ -59,8 +68,20 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lsp", "path", "snippets", "buffer",  "avante", "copilot"},
 			providers = {
+				copilot = {
+					name = "copilot",
+					module = "blink-cmp-copilot",
+					score_offset = 100,
+					async = true,
+				},
+				avante = {
+					module = "blink-cmp-avante",
+					name = "Avante",
+          enabled = true,
+					async = true,
+				},
 				path = {
 					opts = {
 						get_cwd = function(_)

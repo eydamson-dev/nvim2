@@ -10,8 +10,10 @@ return {
 		-- local capabilities = cmp_capabilities.default_capabilities()
 		local lspconfig = require("lspconfig")
 		local default_capabilities = vim.lsp.protocol.make_client_capabilities()
-		local capabilities =
-			vim.tbl_deep_extend("force", default_capabilities, require("blink.cmp").get_lsp_capabilities({}, false))
+    local blinkcmpCapabilities = require("blink.cmp").get_lsp_capabilities({}, true)
+		-- local capabilities =
+		-- 	vim.tbl_deep_extend("force", default_capabilities, blinkcmpCapabilities)
+    local capabilities = blinkcmpCapabilities
 
 		local function organize_imports()
 			local params = {
