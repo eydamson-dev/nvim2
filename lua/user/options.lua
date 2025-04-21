@@ -40,9 +40,9 @@ vim.opt.shortmess:append "c"
 vim.o.switchbuf = "usetab,newtab"
 
 -- enable treesitter to handle the folding
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.cmd([[ set nofoldenable]])
+-- vim.o.foldmethod = 'expr'
+-- vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.cmd([[ set nofoldenable]])
 
 -- auto hide command line
 vim.o.ls = 0
