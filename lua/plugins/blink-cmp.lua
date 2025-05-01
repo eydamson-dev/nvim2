@@ -48,7 +48,7 @@ return {
 				},
 			},
 			menu = {
-				border = "rounded",
+				border = "double",
 				draw = {
 					treesitter = {
 						"lsp",
