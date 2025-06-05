@@ -37,7 +37,7 @@ return {
 		completion = {
 			list = {
 				selection = {
-					preselect = true,
+					preselect = false,
 					auto_insert = false,
 				},
 			},
@@ -48,7 +48,7 @@ return {
 				},
 			},
 			menu = {
-				border = "double",
+				border = "rounded",
 				draw = {
 					treesitter = {
 						"lsp",
@@ -68,7 +68,7 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer",  "avante", "copilot"},
+			default = { "lsp", "path", "snippets", "buffer", "avante", "copilot" },
 			providers = {
 				copilot = {
 					name = "copilot",
@@ -79,7 +79,7 @@ return {
 				avante = {
 					module = "blink-cmp-avante",
 					name = "Avante",
-          enabled = true,
+					enabled = true,
 					async = true,
 				},
 				path = {
