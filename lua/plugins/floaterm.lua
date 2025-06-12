@@ -10,6 +10,8 @@ return {
 		local keymap = vim.keymap.set
 		local opts = { noremap = true, silent = true }
 
+    keymap('n', "<C-g>", "<cmd>FloatermNew lazygit<cr>")
+
 		local function toggleTerminal(term_name)
 			local exist = vim.fn["floaterm#terminal#get_bufnr"](term_name)
 			if exist == -1 then
