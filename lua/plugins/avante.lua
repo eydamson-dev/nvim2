@@ -5,6 +5,19 @@ return {
 	opts = {
 		provider = "gemini",
 		auto_suggestions_provider = "gemini",
+		-- Configure the Gemini provider
+		providers = {
+			gemini = {
+				-- You can specify the model you want to use
+				-- Check Google's documentation for the latest models.
+				-- e.g., 'gemini-1.5-pro-latest' or 'gemini-1.5-flash-latest'
+        model = "gemini-2.5-flash-latest",
+
+				-- Optional: Set other parameters if needed
+				temperature = 0.5,
+				max_tokens = 4096,
+			},
+		},
 		behavior = {
 			auto_suggestions = true,
 			auto_suggestions_delay = 1000,

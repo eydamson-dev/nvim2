@@ -7,7 +7,6 @@ return {
 	},
 	version = "^1.0.0", -- optional: only update when a new 1.x version is released
 	opts = {
-		tabpages = true,
 		focus_on_close = "left",
 		highlight_visible = true,
 		highlight_inactive = true,
