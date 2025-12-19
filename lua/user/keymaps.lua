@@ -22,7 +22,7 @@ vim.g.maplocalleader = ","
 -- Remap command mode
 keymap("n", ";;", ":", opts)
 
-keymap("n", "<space>e", ":Lex 30<cr>", opts)
+-- keymap("n", "<space>e", ":Lex 30<cr>", opts)
 keymap("n", "<leader>ei", ":edit ~/.config/nvim/init.lua<CR>", opts)
 keymap("n", "<leader>em", ":edit ~/.config/nvim/lua/user/keymaps.lua<CR>", opts)
 keymap("n", "<leader>ep", ":edit ~/.config/nvim/lua/user/plugins.lua<CR>", opts)

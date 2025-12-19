@@ -27,26 +27,36 @@ return {
     },
     explorer = {
       enabled = true,
-      picker = {
-        sources = {
-          explorer = {
-            -- Customize the layout for centering the floating window
+      replace_netrw = true, -- Replace netrw with the snacks explorer
+      trash = true,         -- Use the system trash when deleting files
+    },
+    picker = {
+      sources = {
+        explorer = {
+          finder = "explorer",
+          jump = { close = true },
+          layout = {
+            preset = "default",
+            preview = true,
             layout = {
-              layout = {
-                position = "center", -- Center the window horizontally and vertically
-                size = {
-                  width = 0.5,       -- Set width to 50% of screen width
-                  height = 0.8,      -- Set height to 80% of screen height
-                },
-              },
-            },
-            -- This is the crucial setting for auto-closing.
-            -- It redefines the action when you press <CR> (Enter) on a file.
-            -- "open" opens the file in the current window.
-            -- "close" closes the picker/explorer window.
-            -- Combining them achieves "open file and auto close explorer".
-            action_select = { "open", "close" },
+              width = 0.6
+            }
           },
+          win = {
+            input = {
+              keys = {
+                ["<C-q>"] = "close"
+              }
+            },
+            list = {
+              keys = {
+                ["o"] = "confirm",
+                ["O"] = "explorer_open",
+                ["<C-c>"] = "close",
+                ["<C-q>"] = "close"
+              }
+            }
+          }
         },
       },
     },
@@ -107,6 +117,10 @@ return {
     local keymap = vim.keymap.set
     keymap("n", "<leader>z", function()
       Snacks.zen()
+    end)
+
+    keymap("n", "<space>e", function()
+      Snacks.explorer.open()
     end)
   end
 }
