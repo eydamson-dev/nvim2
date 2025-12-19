@@ -6,6 +6,7 @@ return {
     vim.cmd.colorscheme "catppuccin-macchiato"
   end,
   opts = {
-    transparent_background = true
+    transparent_background = true,
+    auto_integrations = true,
   }
 }
