@@ -17,10 +17,6 @@ return {
 				enabled = true,
 			},
 		},
-
-		sidebar_filetypes = {
-			NvimTree = true,
-		},
 	},
 	init = function()
 		vim.g.barbar_auto_setup = false

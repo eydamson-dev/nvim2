@@ -1,5 +1,5 @@
 return {
-  enabled = false,
+  enabled = true,
   "nvim-tree/nvim-tree.lua",
   version = "^1",
   lazy = false,
@@ -11,10 +11,12 @@ return {
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
-    -- optionally enable 24-bit colour
     vim.opt.termguicolors = true
     local keymap = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
+
+    local HEIGHT_RATIO = 0.8  -- 80% height
+    local WIDTH_RATIO = 0.5   -- 50% width
 
     keymap("n", "<space>e", ":NvimTreeToggle<cr>", opts)
     keymap("n", "<space>f", ":NvimTreeFindFile<cr>", opts)
@@ -41,23 +43,36 @@ return {
         centralize_selection = false,
         cursorline = true,
         debounce_delay = 15,
-        side = "left",
         preserve_window_proportions = false,
         number = false,
         relativenumber = false,
         signcolumn = "yes",
-        width = 30,
+        -- side = "left",
+        width = function()
+          return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+        end,
         float = {
-          enable = false,
+          enable = true,
           quit_on_focus_loss = true,
-          open_win_config = {
-            relative = "editor",
-            border = "rounded",
-            width = 30,
-            height = 30,
-            row = 1,
-            col = 1,
-          },
+          open_win_config = function()
+            local screen_w = vim.opt.columns:get()
+            local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+            local window_w = screen_w * WIDTH_RATIO
+            local window_h = screen_h * HEIGHT_RATIO
+            local window_w_int = math.floor(window_w)
+            local window_h_int = math.floor(window_h)
+            local center_x = (screen_w - window_w) / 2
+            local center_y = ((vim.opt.lines:get() - window_h) / 2)
+                - vim.opt.cmdheight:get()
+            return {
+              border = 'rounded',
+              relative = 'editor',
+              row = center_y,
+              col = center_x,
+              width = window_w_int,
+              height = window_h_int,
+            }
+          end,
         },
       },
       renderer = {

@@ -11,7 +11,7 @@ return {
     zen = {
       center = true,
       win = {
-        width = 0.6,
+        width = 0.45,
         height = 0,
       },
       show = {
@@ -119,8 +119,8 @@ return {
       Snacks.zen()
     end)
 
-    keymap("n", "<space>e", function()
-      Snacks.explorer.open()
-    end)
+    -- keymap("n", "<space>e", function()
+    --   Snacks.explorer.open()
+    -- end)
   end
 }
