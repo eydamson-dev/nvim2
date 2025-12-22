@@ -7,6 +7,15 @@ return {
   end,
   opts = {
     transparent_background = true,
+    float = {
+      transparent = true
+    },
     auto_integrations = true,
+    integrations = {
+      barbar = true,
+      blink_cmp = {
+        style = "rounded"
+      }
+    }
   }
 }
