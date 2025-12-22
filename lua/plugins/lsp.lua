@@ -29,6 +29,7 @@ return {
 				"lua_ls",
 				"vtsls",
 				"yamlls",
+        "basedpyright"
 			},
 			-- Removed `handlers`, using native config instead
 		})
@@ -74,6 +75,20 @@ return {
 		--   automatic_enable = true,
 		--   ensure_installed = { ... },
 		-- })
+
+    lsp.enable("basedpyright")
+    lsp.config("basedpyright", {
+      capabilities = capabilities,
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            useLibraryCodeForTypes = true,
+            diagnosticMode = "workspace",
+          },
+        },
+      },
+    })
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
