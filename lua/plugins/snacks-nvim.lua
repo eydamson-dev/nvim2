@@ -32,8 +32,12 @@ return {
     },
     picker = {
       sources = {
+        files = {
+          hidden = true,
+        },
         explorer = {
-          finder = "explorer",
+          hidden = true,
+          git_untracked = false,
           jump = { close = true },
           layout = {
             preset = "default",
@@ -50,6 +54,8 @@ return {
             },
             list = {
               keys = {
+                ["/"] = false,
+                ["n"] = "list_down",
                 ["o"] = "confirm",
                 ["O"] = "explorer_open",
                 ["<C-c>"] = "close",
@@ -119,8 +125,8 @@ return {
       Snacks.zen()
     end)
 
-    -- keymap("n", "<space>e", function()
-    --   Snacks.explorer.open()
-    -- end)
+    keymap("n", "<space>e", function()
+      Snacks.explorer.open()
+    end)
   end
 }

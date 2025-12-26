@@ -1,5 +1,5 @@
 return {
-  enabled = true,
+  enabled = false,
   "nvim-tree/nvim-tree.lua",
   version = "^1",
   lazy = false,
