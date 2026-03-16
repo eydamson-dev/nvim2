@@ -3,6 +3,6 @@ return {
   version = "2.*",
   build = "make install_jsregexp",
   dependencies = {
-    "rafamadriz/friendly-snippets",   -- a bunch of snippets to use
-  }
+    "rafamadriz/friendly-snippets", -- a bunch of snippets to use
+  },
 }

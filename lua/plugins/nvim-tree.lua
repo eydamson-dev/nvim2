@@ -15,8 +15,8 @@ return {
     local keymap = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
 
-    local HEIGHT_RATIO = 0.8  -- 80% height
-    local WIDTH_RATIO = 0.5   -- 50% width
+    local HEIGHT_RATIO = 0.8 -- 80% height
+    local WIDTH_RATIO = 0.5 -- 50% width
 
     keymap("n", "<space>e", ":NvimTreeToggle<cr>", opts)
     keymap("n", "<space>f", ":NvimTreeFindFile<cr>", opts)
@@ -62,11 +62,10 @@ return {
             local window_w_int = math.floor(window_w)
             local window_h_int = math.floor(window_h)
             local center_x = (screen_w - window_w) / 2
-            local center_y = ((vim.opt.lines:get() - window_h) / 2)
-                - vim.opt.cmdheight:get()
+            local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
             return {
-              border = 'rounded',
-              relative = 'editor',
+              border = "rounded",
+              relative = "editor",
               row = center_y,
               col = center_x,
               width = window_w_int,

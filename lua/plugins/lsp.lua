@@ -31,7 +31,7 @@ return {
         "yamlls",
         -- python
         "basedpyright",
-        "ruff"
+        "ruff",
       },
       -- Removed `handlers`, using native config instead
     })
@@ -84,7 +84,7 @@ return {
             autoSearchPaths = true,
             useLibraryCodeForTypes = true,
             diagnosticMode = "workspace",
-            typeCheckingMode = "basic"
+            typeCheckingMode = "basic",
           },
         },
       },
@@ -122,20 +122,20 @@ return {
 
     local wk = require("which-key")
     wk.add({
-      { "<leader>l",  group = "LSP" },
-      { "<leader>la", "<cmd>Lspsaga code_action<cr>",                     desc = "Code Actions" },
-      { "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<cr>",           desc = "Line Diagnostic" },
-      { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<cr>",     desc = "Workspace Diagnostics" },
-      { "<leader>lh", "<cmd>Lspsaga hover_doc<cr>",                       desc = "Hover" },
-      { "<leader>li", "<cmd>LspInfo<cr>",                                 desc = "Info" },
-      { "<leader>lI", "<cmd>LspInstallInfo<cr>",                          desc = "Installer Info" },
-      { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<CR>",          desc = "Next Diagnostic" },
-      { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>",          desc = "Prev Diagnostic" },
-      { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>",              desc = "CodeLens Action" },
-      { "<leader>lq", "<cmd>lua vim.diagnostic.set_loclist()<cr>",        desc = "Quickfix" },
-      { "<leader>lr", "<cmd>Lspsaga rename<cr>",                          desc = "Rename" },
-      { "<leader>lR", "<cmd>Telescope lsp_references<cr>",                desc = "References" },
-      { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",          desc = "Document Symbols" },
+      { "<leader>l", group = "LSP" },
+      { "<leader>la", "<cmd>Lspsaga code_action<cr>", desc = "Code Actions" },
+      { "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Line Diagnostic" },
+      { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>lh", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover" },
+      { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
+      { "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "Installer Info" },
+      { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next Diagnostic" },
+      { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
+      { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
+      { "<leader>lq", "<cmd>lua vim.diagnostic.set_loclist()<cr>", desc = "Quickfix" },
+      { "<leader>lr", "<cmd>Lspsaga rename<cr>", desc = "Rename" },
+      { "<leader>lR", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+      { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
       { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
     })
   end,

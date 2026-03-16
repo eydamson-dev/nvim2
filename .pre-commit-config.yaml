@@ -5,7 +5,5 @@ repos:
       - id: stylua
         args: ["--check"]
 
-  - repo: https://github.com/JohnnyMorganz/Selene
-    rev: v0.24.0
-    hooks:
-      - id: selene
+  # Selene removed - no pre-built binaries available
+  # Install manually if needed: cargo install selene

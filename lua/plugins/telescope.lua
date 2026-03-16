@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   config = function()
-    local telescope = require('telescope')
+    local telescope = require("telescope")
 
     -- Shorten function name
     local keymap = vim.api.nvim_set_keymap
@@ -13,10 +13,9 @@ return {
     keymap("n", "<leader>fh", ":Telescope help_tags<cr>", opts)
     keymap("n", "<leader>p", ":Telescope projects<cr>", opts)
 
+    local actions = require("telescope.actions")
 
-    local actions = require "telescope.actions"
-
-    telescope.setup {
+    telescope.setup({
       defaults = {
         file_ignore_patterns = { "node_modules", "documentation", "jQuery", "handlebars", "youtube-embed", "fonts" },
         prompt_prefix = " ",
@@ -98,6 +97,6 @@ return {
           },
         },
       },
-    }
-  end
+    })
+  end,
 }

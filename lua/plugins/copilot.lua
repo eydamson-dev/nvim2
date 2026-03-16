@@ -1,8 +1,9 @@
 return {
-	"zbirenbaum/copilot.lua",
-	event = "VeryLazy",
-	opts = {
-		suggestion = { enabled = false },
-		panel = { enabled = false },
-	},
+  enabled = true,
+  "zbirenbaum/copilot.lua",
+  event = "VeryLazy",
+  opts = {
+    suggestion = { enabled = false },
+    panel = { enabled = false },
+  },
 }

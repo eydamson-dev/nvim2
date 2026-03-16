@@ -6,7 +6,7 @@ return {
     styles = {
       zen = {
         backdrop = { transparent = false },
-      }
+      },
     },
     zen = {
       center = true,
@@ -22,13 +22,13 @@ return {
         dim = false,
         git_signs = true,
         diagnostics = true,
-        inlay_hint = true
-      }
+        inlay_hint = true,
+      },
     },
     explorer = {
       enabled = true,
       replace_netrw = true, -- Replace netrw with the snacks explorer
-      trash = true,         -- Use the system trash when deleting files
+      trash = true, -- Use the system trash when deleting files
     },
     picker = {
       sources = {
@@ -43,14 +43,14 @@ return {
             preset = "default",
             preview = true,
             layout = {
-              width = 0.6
-            }
+              width = 0.6,
+            },
           },
           win = {
             input = {
               keys = {
-                ["<C-q>"] = "close"
-              }
+                ["<C-q>"] = "close",
+              },
             },
             list = {
               keys = {
@@ -59,10 +59,10 @@ return {
                 ["o"] = "confirm",
                 ["O"] = "explorer_open",
                 ["<C-c>"] = "close",
-                ["<C-q>"] = "close"
-              }
-            }
-          }
+                ["<C-q>"] = "close",
+              },
+            },
+          },
         },
       },
     },
@@ -113,7 +113,7 @@ return {
       },
     },
     sections = {
-      { section = "keys",   gap = 1, padding = 1 },
+      { section = "keys", gap = 1, padding = 1 },
       { section = "startup" },
       { section = "header" },
     },
@@ -128,5 +128,5 @@ return {
     keymap("n", "<space>e", function()
       Snacks.explorer.open()
     end)
-  end
+  end,
 }

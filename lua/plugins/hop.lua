@@ -1,10 +1,9 @@
 return {
-  'phaazon/hop.nvim',
+  "phaazon/hop.nvim",
   config = function()
-    require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     local keymap = vim.api.nvim_set_keymap
     local opts = { noremap = true, silent = true }
     keymap("n", "f", ":HopWord<CR>", opts)
-  end
+  end,
 }
-
