@@ -134,7 +134,6 @@ return {
 ### Tools
 
 - **Stylua** - Lua formatter (standard in Neovim community)
-- **Selene** - Lua linter for common errors
 - **pre-commit** - Hook framework
 
 ### Validation Commands
@@ -145,9 +144,6 @@ stylua --check .
 
 # Fix formatting
 stylua .
-
-# Run linter
-selene .
 
 # Full validation
 pre-commit run --all-files
