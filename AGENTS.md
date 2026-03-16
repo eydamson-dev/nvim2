@@ -1,20 +1,17 @@
-# Neovim Configuration
+# Neovim Configuration - Agent Guidelines
 
 ## Project Overview
-
 - **Type**: Neovim configuration (`~/.config/nvim`)
 - **Plugin Manager**: lazy.nvim
 - **Leader Key**: `,` (comma)
 - **Plugins**: ~40 plugins
 
 ## Setup
-
-1. Clone this repo to `~/.config/nvim`
-2. Open Neovim - lazy.nvim will auto-bootstrap and install plugins
-3. Run `:Lazy sync` to ensure all plugins are installed
+1. Clone to `~/.config/nvim`
+2. Open Neovim - lazy.nvim auto-bootstraps
+3. Run `:Lazy sync` to install plugins
 
 ## Directory Structure
-
 ```
 nvim/
 ├── init.lua                  -- Entry point
@@ -22,86 +19,64 @@ nvim/
 ├── .stylua.toml              -- Lua formatter config
 ├── .pre-commit-config.yaml   -- Pre-commit hooks
 ├── lua/
-│   ├── config/
-│   │   └── lazy.lua         -- Plugin manager setup
-│   ├── plugins/             -- Individual plugin configs
-│   │   ├── lsp.lua
-│   │   ├── telescope.lua
-│   │   ├── treesitter.lua
-│   │   └── ...
+│   ├── config/lazy.lua       -- Plugin manager setup
+│   ├── plugins/*.lua         -- Individual plugin configs (~35 files)
 │   └── user/
-│       ├── options.lua      -- vim.opt settings
-│       └── keymaps.lua      -- Keybindings
+│       ├── options.lua       -- vim.opt settings
+│       └── keymaps.lua       -- Keybindings
 ```
 
-## Plugin Management
+## Commands
 
-Uses **lazy.nvim** with spec import pattern.
+### Plugin Management
+```bash
+nvim +":Lazy sync" +qa        # Install/update plugins
+nvim +":Lazy clean" +qa      # Remove unused plugins
+nvim +":Lazy update" +qa     # Check for updates
+nvim +":Lazy" +qa            # Open lazy.nvim UI
+```
 
-### Commands
+### Linting & Formatting
+```bash
+stylua --check .             # Check formatting
+stylua .                     # Fix formatting
+nvim --headless +qa          # Basic load test
+pre-commit run --all-files   # Full validation
+```
 
-- `:Lazy` - Open lazy.nvim UI
-- `:Lazy sync` - Install/update plugins
-- `:Lazy clean` - Remove unused plugins
-- `:Lazy update` - Check for updates
+### Health Check
+```bash
+nvim --headless +qa          # Load test
+nvim +":checkhealth" +qa    # Full diagnostics
+```
 
 ## Git Workflow
-
-### Branch Creation
-
-- **ALWAYS create a new branch** for each coding session
-- Branch naming: `feat/<description>`, `fix/<description>`, or `chore/<description>`
-- Branch from: `master`
-
-### Commits
-
-- **NEVER commit automatically** - only commit when user explicitly requests it
-- **NEVER amend commits** unless explicitly requested
-
-### Push & PR
-
-- **NEVER push** unless explicitly requested
-- After user approves changes, create PR via `gh pr create`
-- Use community standard PR template
-- Return PR URL to user after creation
+- **Branches**: Always create `feat/<description>`, `fix/<description>`, or `chore/<description>` from `master`
+- **Commits**: NEVER commit automatically - only when user requests
+- **Push/PR**: NEVER push unless explicitly requested
 
 ## Code Style
 
-Use modern Neovim 0.10+ standards:
+### Formatting (Stylua)
+- 120 column width, 2-space indentation, Unix line endings
+- Double quotes preferred, always use call parentheses
+- Sort requires enabled
 
 ### Keymaps
-
 Use `vim.keymap.set()` instead of `vim.api.nvim_set_keymap`:
-
 ```lua
--- Bad
-vim.api.nvim_set_keymap("n", "ss", ":w<CR>", { noremap = true, silent = true })
-
--- Good
 vim.keymap.set("n", "ss", ":w<CR>", { noremap = true, silent = true })
 ```
 
 ### Options
-
 Use `vim.opt` instead of `vim.cmd`:
-
 ```lua
--- Bad
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-
--- Good
 vim.opt.whichwrap:append { '<', '>', '[', ']', 'h', 'l' }
 ```
 
 ### Autocommands
-
 Use `vim.api.nvim_create_autocmd`:
-
 ```lua
--- Bad
-vim.cmd("autocmd BufReadPre * lua set_foldmethod()")
-
--- Good
 vim.api.nvim_create_autocmd("BufReadPre", {
   callback = function()
     set_foldmethod()
@@ -110,82 +85,57 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 ```
 
 ### Plugin Config
-
-Use `opts` table when plugin supports it:
-
+Use `opts` table for simple configs; `config` function only when needed:
 ```lua
--- For simple configs
-return {
-  "plugin/name",
-  opts = { key = "value" },
-}
-
--- Only use config function when needed
-return {
-  "plugin/name",
-  config = function()
-    -- complex setup
-  end,
-}
+-- Simple: return { "plugin/name", opts = { key = "value" } }
+-- Complex: return { "plugin/name", config = function() ... end }
 ```
 
-## Linting & Formatting
-
-### Tools
-
-- **Stylua** - Lua formatter (standard in Neovim community)
-- **pre-commit** - Hook framework
-
-### Validation Commands
-
-```bash
-# Check formatting
-stylua --check .
-
-# Fix formatting
-stylua .
-
-# Full validation
-pre-commit run --all-files
-
-# Basic load test
-nvim --headless +qa
+### Imports
+Use consistent require paths (no .lua extension):
+```lua
+require "user.options"
+require "plugins.lsp"
 ```
 
-### Pre-commit Hooks
+### Naming Conventions
+- **Files**: lowercase with hyphens (`nvim-tree.lua`)
+- **Variables/Functions**: snake_case
+- **Tables/Modules**: PascalCase for public modules (`local M = {}`)
+- **Private functions**: prefix with underscore
 
-The project uses pre-commit. Install with:
+### Error Handling
+Use pcall for unsafe operations:
+```lua
+local ok, result = pcall(require, "module")
+if not ok then
+  vim.notify("Failed to load: " .. result, vim.log.levels.ERROR)
+  return
+end
+```
 
-```bash
-pip install pre-commit
-pre-commit install
+### Lazy Loading
+```lua
+return { "plugin/name", event = "BufReadPre" }
+return { "plugin/name", cmd = "Git" }
+return { "plugin/name", keys = { { "n", "<leader>ff", ... } } }
 ```
 
 ## Common Tasks
 
-### Add a New Plugin
-
-1. Create new file in `lua/plugins/<name>.lua`
+### Add Plugin
+1. Create `lua/plugins/<name>.lua`
 2. Return plugin spec table
-3. Run `:Lazy sync` to install
-
-### Configure LSP Server
-
-Edit `lua/plugins/lsp.lua`:
-- Add server to `ensure_installed` list in Mason config
-- Add custom config in `lsp.config()` section
+3. Run `:Lazy sync`
 
 ### Add Keybinding
+Edit `lua/user/keymaps.lua` - use `vim.keymap.set()`
 
-Edit `lua/user/keymaps.lua`:
-- Use `vim.keymap.set()`
-- Follow the existing patterns
+### Configure LSP
+Edit `lua/plugins/lsp.lua` - add server to `ensure_installed` list
 
 ## Health Check
-
-Run these to verify config:
-
 ```bash
-nvim --headless +qa           # Basic load test
-nvim +":checkhealth" +qa      # Full diagnostics
+nvim --headless +qa           # Load test
+nvim +":checkhealth" +qa     # Full diagnostics
 ```
