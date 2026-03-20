@@ -17,6 +17,22 @@ return {
       vim.lsp.buf.execute_command(params)
     end
 
+    local on_attach = function(client, bufnr)
+      if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          group = "lsp_document_highlight",
+          buffer = bufnr,
+          callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+          group = "lsp_document_highlight",
+          buffer = bufnr,
+          callback = vim.lsp.buf.clear_references,
+        })
+      end
+    end
+
     require("mason").setup()
     require("mason-lspconfig").setup({
       automatic_installation = false,
@@ -43,19 +59,20 @@ return {
     lsp.enable("vtsls")
     lsp.config("vtsls", {
       capabilities = capabilities,
-      commands = {
-        OrganizeImports = {
-          organize_imports,
-          description = "Organize Imports",
-        },
-      },
       on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
         local orig_format = vim.lsp.buf.format
         vim.lsp.buf.format = function(opts)
           organize_imports()
           orig_format(opts)
         end
       end,
+      commands = {
+        OrganizeImports = {
+          organize_imports,
+          description = "Organize Imports",
+        },
+      },
     })
 
     -- For other servers, you can set default or no custom config
@@ -69,12 +86,13 @@ return {
       "yamlls",
     }) do
       lsp.enable(server)
-      lsp.config(server, { capabilities = capabilities })
+      lsp.config(server, { capabilities = capabilities, on_attach = on_attach })
     end
 
     lsp.enable("basedpyright")
     lsp.config("basedpyright", {
       capabilities = capabilities,
+      on_attach = on_attach,
       settings = {
         python = {
           disableOrganizeImports = true,
@@ -93,7 +111,8 @@ return {
     lsp.enable("ruff")
     lsp.config("ruff", {
       capabilities = capabilities,
-      on_attach = function(client, _)
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
         -- Disable hover in Ruff to let Basedpyright handle it
         client.server_capabilities.hoverProvider = false
       end,

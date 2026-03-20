@@ -50,3 +50,8 @@ vim.o.ch = 0
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 -- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+-- LSP document highlight colors
+vim.api.nvim_set_hl(0, "LspReferenceText", { bg = "#515665", default = true })
+vim.api.nvim_set_hl(0, "LspReferenceRead", { bg = "#515665", default = true })
+vim.api.nvim_set_hl(0, "LspReferenceWrite", { bg = "#515665", default = true })

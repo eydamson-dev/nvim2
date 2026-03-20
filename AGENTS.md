@@ -54,6 +54,11 @@ nvim +":checkhealth" +qa    # Full diagnostics
 - **Branches**: Always create `feat/<description>`, `fix/<description>`, or `chore/<description>` from `master`
 - **Commits**: NEVER commit automatically - only when user requests
 - **Push/PR**: NEVER push unless explicitly requested
+- **PR Creation**: When user requests a PR, ALWAYS create the PR link in this format:
+  ```
+  https://github.com/eydamson-dev/nvim2/pull/new/<branch-name>
+  ```
+  The user will create the PR manually on GitHub.
 
 ## Code Style
 
