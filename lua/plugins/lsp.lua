@@ -39,6 +39,7 @@ return {
       ensure_installed = {
         "bashls",
         "cssmodules_ls",
+        "tailwindcss",
         "eslint",
         "html",
         "jsonls",

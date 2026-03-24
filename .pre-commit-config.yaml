@@ -1,9 +1,0 @@
-repos:
-  - repo: https://github.com/JohnnyMorganz/StyLua
-    rev: v0.20.0
-    hooks:
-      - id: stylua
-        args: ["--check"]
-
-  # Selene removed - no pre-built binaries available
-  # Install manually if needed: cargo install selene
