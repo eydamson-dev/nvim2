@@ -23,6 +23,11 @@ return {
         selection_caret = " ",
         path_display = { "smart" },
 
+        -- Disable treesitter previewer highlighter to avoid ft_to_lang error
+        preview = {
+          treesitter = false,
+        },
+
         layout_config = {
           width = 0.95,
           horizontal = {

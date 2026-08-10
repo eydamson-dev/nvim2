@@ -9,8 +9,14 @@ return {
         input = {},
         picker = {
           actions = {
-            opencode_send = function(...)
-              return require("opencode").snacks_picker_send(...)
+            opencode_send = function(picker) ---@param picker snacks.Picker
+              local items = vim.tbl_map(function(item) ---@param item snacks.picker.Item
+                return item.file
+                    and require("opencode").format({ path = item.file, from = item.pos, to = item.end_pos })
+                  or item.text
+              end, picker:selected({ fallback = true }))
+
+              require("opencode").prompt(table.concat(items, ", ") .. " ")
             end,
           },
           win = {
@@ -33,34 +39,28 @@ return {
         position = "right",
         width = 0.4,
         enter = false,
-        on_win = function(win)
-          require("opencode.terminal").setup(win.win)
-        end,
       },
     }
 
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      lsp = {
-        enabled = true,
-      },
       server = {
         start = function()
           require("snacks.terminal").open(opencode_cmd, snacks_terminal_opts)
         end,
-        stop = function()
-          local term = require("snacks.terminal").get(opencode_cmd, snacks_terminal_opts)
-          if term then
-            term:close()
-          end
-        end,
-        toggle = function()
-          require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts)
-        end,
       },
     }
 
-    vim.o.autoread = true
+    local function stop_opencode()
+      local term = require("snacks.terminal").get(opencode_cmd, snacks_terminal_opts)
+      if term then
+        term:close()
+      end
+    end
+
+    local function toggle_opencode()
+      require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts)
+    end
 
     local keymap = vim.keymap.set
 
@@ -70,16 +70,16 @@ return {
     end, { desc = "Start opencode" })
 
     keymap("n", "<leader>ox", function()
-      vim.g.opencode_opts.server.stop()
+      stop_opencode()
     end, { desc = "Stop opencode" })
 
     keymap({ "n", "t" }, "<leader>ot", function()
-      vim.g.opencode_opts.server.toggle()
+      toggle_opencode()
     end, { desc = "Toggle opencode" })
 
     -- Ask and Select
     keymap({ "n", "x" }, "<leader>oa", function()
-      require("opencode").ask("@this: ", { submit = true })
+      require("opencode").prompt("@this:")
     end, { desc = "Ask opencode" })
 
     keymap({ "n", "x" }, "<leader>os", function()
@@ -137,11 +137,11 @@ return {
 
     -- Buffer contexts
     keymap("n", "<leader>ob", function()
-      require("opencode").ask("@buffer: ", { submit = true })
+      require("opencode").prompt("@buffer:")
     end, { desc = "Ask about current buffer" })
 
     keymap("n", "<leader>oB", function()
-      require("opencode").ask("@buffers: ", { submit = true })
+      require("opencode").prompt("@buffers:")
     end, { desc = "Ask about all buffers" })
 
     -- Model switching via picker
